@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily To-Do Planner</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light px-3 justify-content-between" id="mainNav">
+    <span class="navbar-brand mb-0 h1">📝 To-Do Planner</span>
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="themeSwitch">
+      <label class="form-check-label" for="themeSwitch">Dark Mode</label>
+    </div>
+  </nav>
+
+  <!-- Date & Clear -->
+  <div class="padding-content">
+    <h2>To do list</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <input type="date" id="datePicker" class="form-control me-2" />
+      <button onclick="clearData()" class="btn btn-outline-danger btn-sm">Clear</button>
+    </div>
+
+    <!-- Focus + Must Get Done -->
+    <div class="row">
+      <!-- Focus -->
+      <div class="col-12 col-md-6 mb-3">
+        <div class="section h-100 d-flex flex-column" style="min-height: 250px;">
+          <div class="section-title">FOCUS:</div>
+          <input type="text" class="line-input" id="focus1">
+          <input type="text" class="line-input" id="focus2">
+          <input type="text" class="line-input" id="focus3">
+          <input type="text" class="line-input" id="focus4">
+          <input type="text" class="line-input" id="focus5">
+        </div>
+      </div>
+
+      <!-- Must Get Done Today -->
+      <div class="col-12 col-md-6 mb-3">
+        <div class="section h-100 d-flex flex-column" style="min-height: 250px;">
+          <div class="section-title">MUST GET DONE TODAY:</div>
+          <input type="text" class="line-input" id="must1">
+          <input type="text" class="line-input" id="must2">
+          <input type="text" class="line-input" id="must3">
+          <input type="text" class="line-input" id="must4">
+          <input type="text" class="line-input" id="must5">
+        </div>
+      </div>
+    </div>
+    <!-- TO-DO + IF I HAVE TIME -->
+    <div class="row">
+      <div class="col-12 col-md-6 mb-3">
+        <div class="section h-100 d-flex flex-column" style="min-height: 250px;">
+          <div class="section-title">TO-DO LIST:</div>
+          <div class="todo-item">
+            <input type="checkbox" id="todoCheck1" onchange="toggleCheck(this)">
+            <input type="text" class="todo-label" id="todo1">
+          </div>
+          <div class="todo-item">
+            <input type="checkbox" id="todoCheck2" onchange="toggleCheck(this)">
+            <input type="text" class="todo-label" id="todo2">
+          </div>
+          <div class="todo-item">
+            <input type="checkbox" id="todoCheck3" onchange="toggleCheck(this)">
+            <input type="text" class="todo-label" id="todo3">
+          </div>
+          <div class="todo-item">
+            <input type="checkbox" id="todoCheck4" onchange="toggleCheck(this)">
+            <input type="text" class="todo-label" id="todo4">
+          </div>
+          <div class="todo-item">
+            <input type="checkbox" id="todoCheck4" onchange="toggleCheck(this)">
+            <input type="text" class="todo-label" id="todo5">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6 mb-3">
+        <div class="section h-100 d-flex flex-column" style="min-height: 250px;">
+          <div class="section-title">IF I HAVE TIME:</div>
+          <input type="text" class="line-input" id="if1">
+          <input type="text" class="line-input" id="if2">
+          <input type="text" class="line-input" id="if3">
+          <input type="text" class="line-input" id="if4">
+          <input type="text" class="line-input" id="if5">
+        </div>
+      </div>
+    </div>
+
+    <!-- Today’s Plans -->
+    <div class="section">
+      <div class="section-title">TODAY’S PLANS:</div>
+      <div id="planSlots"></div>
+    </div>
+
+    <!-- Notes -->
+    <div class="section">
+      <div class="section-title">NOTES:</div>
+      <textarea class="notes-area" rows="2" id="note1"></textarea>
+      <textarea class="notes-area" rows="2" id="note2"></textarea>
+      <textarea class="notes-area" rows="2" id="note3"></textarea>
+    </div>
+  </div>
+  <footer class="footer text-center">
+    <p>&copy; 2025 Daily To-Do Planner | Designed by Kavya Gajendran</p>
+  </footer>
+
+  <script>
+    const fields = [
+      "focus1", "focus2", "focus3", "focus4", "focus5",
+      "must1", "must2", "must3", "must4", "must5",
+      "todo1", "todo2", "todo3", "todo4",
+      "todoCheck1", "todoCheck2", "todoCheck3", "todoCheck4",
+      "if1", "if2", "if3",
+      "note1", "note2", "note3"
+    ];
+
+    const times = [
+      "06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM",
+      "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM",
+      "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM",
+      "09:00 PM", "10:00 PM", "11:00 PM"
+    ];
+
+    const planContainer = document.getElementById('planSlots');
+    times.forEach((time, index) => {
+      const id = `time${index + 1}`;
+      const row = document.createElement("div");
+      row.className = "time-row";
+      row.innerHTML = `
+    <div class="time-label">${time}</div>
+    <input class="line-input time-input" id="${id}">
+  `;
+      planContainer.appendChild(row);
+      fields.push(id);
+    });
+
+    const dateInput = document.getElementById("datePicker");
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+    dateInput.addEventListener("change", function () {
+      console.log("changed");
+      loadData();
+    });
+
+    function getKey() {
+      //alert(dateInput.value);
+      return "planner-" + dateInput.value;
+    }
+
+    function saveData() {
+      console.log("savedata() called");
+      const data = {};
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el.type === "checkbox") {
+          data[id] = el.checked;
+        } else {
+          data[id] = el.value;
+        }
+      });
+      localStorage.setItem(getKey(), JSON.stringify(data));
+    }
+
+    function loadData() {
+      console.log("loadData() called");
+      const saved = localStorage.getItem(getKey());
+      //alert(saved);
+      if (saved) {
+        const data = JSON.parse(saved);
+        fields.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            if (el.type === "checkbox") {
+              el.checked = data[id] || false;
+              toggleCheck(el);
+            } else {
+              el.value = data[id] || "";
+            }
+          }
+        });
+      } else {
+        //Clear the Input fields value
+        fields.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            if (el.type === "checkbox") {
+              el.checked = false;
+              toggleCheck(el);
+            } else {
+              el.value = "";
+            }
+          }
+        });
+      }
+    }
+
+    function clearData() {
+      //alert("clearData called");
+      const selectedDate = dateInput.value;
+      const todayDate = new Date().toISOString().split('T')[0];
+      if (selectedDate !== todayDate) {
+        alert("You can only clear data for today's date.");
+        return;
+      }
+
+      if (confirm("Are you sure you want to clear data for today?")) {
+        localStorage.removeItem(getKey());
+        loadData();
+      }
+    }
+
+    function toggleCheck(cb) {
+      //alert("toggleCheck called");
+      const label = cb.nextElementSibling;
+      if (label) {
+        label.classList.toggle("checked", cb.checked);
+      }
+      saveData();
+    }
+    // Attach input event to all text inputs and textareas, EXCLUDING the date picker
+    document.querySelectorAll("input:not(#datePicker):not([type='checkbox']), textarea").forEach(el => {
+      el.addEventListener("input", saveData);
+    });
+
+    // Checkboxes still need their own handler
+    document.querySelectorAll("input[type='checkbox']").forEach(el => {
+      el.addEventListener("change", saveData);
+    });
+
+    // Theme Toggle Logic
+    const switchBtn = document.getElementById("themeSwitch");
+    switchBtn.addEventListener("change", function () {
+      document.body.classList.toggle("dark-theme", this.checked);
+      localStorage.setItem("theme", this.checked ? "dark" : "light");
+    });
+
+    // Load Theme on Start
+    window.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-theme");
+        document.getElementById("themeSwitch").checked = true;
+      }
+    });
+
+
+    loadData();
+
+  </script>
+</body>
+
+</html>
