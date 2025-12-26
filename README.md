@@ -54,5 +54,3 @@ This project is developed entirely using front-end technologies and does not req
 - Switching the date loads the corresponding saved data
 - If no data exists for a date, a fresh planner is displayed
 - Theme preference is stored and restored on page reload
-
----
