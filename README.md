@@ -1,12 +1,12 @@
 # Daily-To---Do-list
 
 <p align="center">
-  <img src="https://i.ibb.co/0jQ9ChP/neon-banner.gif" width="100%" alt="Project Banner">
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&height=120&section=header&text=Daily%20To-Do%20Planner&fontSize=36&fontColor=ffffff" />
 </p>
 
-<h1 align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=800&size=30&duration=3000&pause=900&color=00F0FF&center=true&vCenter=true&width=800&lines=Daily+To-Do+Planner;Smart+Daily+Task+Management+Web+App" />
-</h1>
+
+<p align="center"><b>Smart Daily Task Management Web Application</b></p>
+
 
 ---
 
