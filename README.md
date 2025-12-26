@@ -54,3 +54,43 @@ This project is developed entirely using front-end technologies and does not req
 - Switching the date loads the corresponding saved data
 - If no data exists for a date, a fresh planner is displayed
 - Theme preference is stored and restored on page reload
+
+
+---
+
+## How to Run the Project
+
+1. Clone or download the repository  
+2. Open `index.html` in any modern web browser  
+3. Select a date and start planning  
+
+No installation or internet connection is required.
+
+---
+
+## Privacy and Data Handling
+
+- All data is stored locally in the user’s browser  
+- No server-side processing or third-party APIs  
+- Complete privacy and offline functionality  
+
+---
+
+## Future Enhancements
+
+- Weekly and monthly calendar view  
+- Export daily plans as PDF  
+- Task completion analytics  
+- Cloud synchronization support  
+
+---
+
+## Author
+
+**Kavya Gajendran**  
+Daily To-Do Planner | 2025  
+
+---
+
+> *Designed to simplify daily planning through structured task management and clean user experience.*
+
