@@ -6,6 +6,8 @@ The Daily To-Do Planner is a responsive, browser-based web application that help
 
 This project is built using HTML, CSS, Bootstrap, and JavaScript, making it lightweight, fast, and suitable for offline use.
 
+
+
 Features
 
 Date-based task planning with automatic data loading
@@ -34,13 +36,17 @@ Responsive design for desktop and mobile devices
 
 Controlled data clearing (only for the current date)
 
+
+
 Technologies Used
+
 Technology	Description
 HTML5	Structure and layout
 CSS3	Styling
 Bootstrap 5	Responsive design
 JavaScript	Application logic
 Local Storage	Client-side data persistence
+
 
 
 How It Works
