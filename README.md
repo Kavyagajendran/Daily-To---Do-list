@@ -56,6 +56,3 @@ This project is developed entirely using front-end technologies and does not req
 - Theme preference is stored and restored on page reload
 
 ---
-
-## Project Structure
-
